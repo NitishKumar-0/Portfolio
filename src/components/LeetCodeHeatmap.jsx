@@ -105,7 +105,7 @@ export function LeetCodeHeatmap({ username }) {
   }, [data])
 
   if (loading && !data) {
-    return <section className="leetcode-heatmap" aria-live="polite"><p className="leetcode-heatmap-message">Loading LeetCode activity…</p></section>
+    return <section className="leetcode-heatmap" aria-live="polite"><p className="leetcode-heatmap-message">Loading LeetCode activity...</p></section>
   }
 
   if (!data) {
@@ -119,9 +119,9 @@ export function LeetCodeHeatmap({ username }) {
     </div>
 
     <div className="leetcode-stats">
-      <div><strong>{Number(data.totalSubmissions).toLocaleString()}</strong><span>Submissions · last 365 days</span></div>
+      <div><strong>{Number(data.totalSubmissions).toLocaleString()}</strong><span>Submissions | last 365 days</span></div>
       <div><strong>{Number(data.totalActiveDays).toLocaleString()}</strong><span>Total active days</span></div>
-      <div><strong>{data.currentStreak == null ? '—' : data.currentStreak + ' days'}</strong><span>Maximum streak</span></div>
+      <div><strong>{data.currentStreak == null ? '-' : data.currentStreak + ' days'}</strong><span>Maximum streak</span></div>
     </div>
 
     {calendar && <div className="leetcode-calendar-scroll" aria-label="Daily submissions for the last 365 days">
@@ -145,7 +145,7 @@ export function LeetCodeHeatmap({ username }) {
     </div>, document.body)}
 
     <div className="leetcode-heatmap-footer">
-      <span className={error ? 'leetcode-warning' : ''}>{error ? error + ' · ' : 'Updated '}{formatUpdatedAt(data.updatedAt)}</span>
+      <span className={error ? 'leetcode-warning' : ''}>{error ? error + ' | ' : 'Updated '}{formatUpdatedAt(data.updatedAt)}</span>
       <span className="leetcode-legend"><span>Less</span>{[0, 1, 2, 3, 4].map(level => <i key={level} className={'leetcode-day level-' + level} aria-hidden="true" />)}<span>More</span></span>
     </div>
   </section>

@@ -2,8 +2,8 @@ export const profile = {
   name: 'Nitish Kumar',
   headline: 'B.Tech CSE | Developer | Problem Solver',
   intro: 'I build thoughtful products, solve real-world problems, and love turning ideas into working solutions.',
-  about: 'I’m a Computer Science Engineering student at Chitkara University who enjoys solving problems, building software, and exploring how emerging technologies can create useful experiences. Alongside coding, I work in filmmaking, video production, and creative direction — interests that influence how I approach design, storytelling, and collaboration.',
-  education: 'B.E. in Computer Science, Chitkara University · 2024–2028 · CGPA 9.69 / 10',
+  about: "I'm a Computer Science Engineering student at Chitkara University who enjoys solving problems, building software, and exploring how emerging technologies can create useful experiences. Alongside coding, I work in filmmaking, video production, and creative direction - interests that influence how I approach design, storytelling, and collaboration.",
+  education: 'B.E. in Computer Science, Chitkara University | 2024-2028 | CGPA 9.69 / 10',
   interests: ['Software engineering', 'AI and LLM integration', 'Filmmaking', 'Video production', 'Creative direction'],
   goal: 'Building useful software and deepening my software engineering skills.',
   portrait: '/images/nitish-portrait.jpg',
@@ -19,7 +19,7 @@ export const profile = {
 export const projects = [
   {
     name: 'QuickPull', type: 'Real-time, route-aware ride-sharing platform',
-    problem: 'The available project notes identify a real-time, route-aware ride-sharing platform but don’t document a narrower problem statement.',
+    problem: "The available project notes identify a real-time, route-aware ride-sharing platform but don't document a narrower problem statement.",
     solution: 'A responsive frontend for the platform, with a documented stack that includes Socket.IO and geospatial tools OSRM, H3, and Turf.js.',
     summary: 'Developed the frontend interface for a real-time ride-sharing platform, focusing on user interaction and a responsive user experience.',
     features: ['Real-time systems', 'Route-aware matching', 'Geospatial technologies', 'Backend development and API design'],

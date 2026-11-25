@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import { Activity, ArrowRight, ArrowUpRight, BookOpenCheck, Code2, Database, FolderKanban, Github, Linkedin, Mail, Send, UserRound } from 'lucide-react'
+import { Activity, ArrowRight, ArrowUpRight, BookOpenCheck, Code2, Database, FolderKanban, Github, Linkedin, Mail, Send, Sparkles, Terminal, UserRound } from 'lucide-react'
 import { codingActivity, profile, projects, skills } from '../data/portfolio'
 
-const categoryIcons = { Languages: Code2, 'Web & backend': FolderKanban, Databases: Database, 'Computer science': Activity, AI: SparkleIcon, 'Tools & infrastructure': TerminalIcon }
-function SparkleIcon({ size = 20 }) { return <span style={{ fontSize: size }}>✳</span> }
-function TerminalIcon({ size = 20 }) { return <span style={{ font: `${size}px monospace` }}>⌘</span> }
+const categoryIcons = { Languages: Code2, 'Web & backend': FolderKanban, Databases: Database, 'Computer science': Activity, AI: Sparkles, 'Tools & infrastructure': Terminal }
 
 export function HomeLaunchers({ select, detail }) {
   return <div className="launcher-row">
     <button aria-pressed={detail === 'About'} className={`launch-card face-card ${detail === 'About' ? 'selected' : ''}`} onClick={() => select('About')}><div className="face-image-wrap"><img src={profile.portrait} alt="Nitish Kumar" /><span className="face-open"><ArrowUpRight size={14} /></span></div><div className="face-caption"><span><UserRound size={12} /> ABOUT ME</span><strong>Nitish Kumar</strong></div></button>
-    <button aria-pressed={detail === 'LeetCode'} className={`launch-card leet-card ${detail === 'LeetCode' ? 'selected' : ''}`} onClick={() => select('LeetCode')}><div className="card-title"><span className="brand-mark orange"><Code2 size={17} /></span><strong>LeetCode</strong><ArrowUpRight size={15} /></div><div className="leet-preview"><span>365-day activity</span></div><div className="card-foot"><span>Activity · last 365 days</span><span className="round-arrow"><ArrowRight size={14} /></span></div></button>
+    <button aria-pressed={detail === 'LeetCode'} className={`launch-card leet-card ${detail === 'LeetCode' ? 'selected' : ''}`} onClick={() => select('LeetCode')}><div className="card-title"><span className="brand-mark orange"><Code2 size={17} /></span><strong>LeetCode</strong><ArrowUpRight size={15} /></div><div className="leet-preview"><span>365-day activity</span></div><div className="card-foot"><span>Activity | last 365 days</span><span className="round-arrow"><ArrowRight size={14} /></span></div></button>
     <SocialCard title="LinkedIn" subtitle="Connect with me" icon={Linkedin} tone="blue" selected={detail === 'LinkedIn'} open={() => select('LinkedIn')} />
     <SocialCard title="GitHub" subtitle="Explore my code" icon={Github} tone="light" selected={detail === 'GitHub' || detail === 'GitHub activity'} open={() => select('GitHub')} />
     <SocialCard title="Resume" subtitle="View / Download" icon={BookOpenCheck} tone="orange" selected={detail === 'Resume'} open={() => select('Resume')} />
@@ -38,7 +36,7 @@ export function ActivityGraph({ compact = false }) {
       const date = new Date(today)
       date.setDate(today.getDate() - (days.length - 1 - i))
       const label = date.toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' })
-      return <span key={i} className={level ? `level-${level}` : 'empty'} title={`${label} · ${level ? `activity level ${level}` : 'no verified activity data'}`} />
+      return <span key={i} className={level ? `level-${level}` : 'empty'} title={`${label} | ${level ? `activity level ${level}` : 'no verified activity data'}`} />
     })}</div>
     {!compact && <div className="graph-caption"><span>{codingActivity.contributions.length ? 'Activity data configured' : 'Contribution data not configured yet'}</span><span className="graph-legend">Less <i /><i /><i /><i /> More</span></div>}
   </div>
@@ -75,5 +73,5 @@ export function ContactExplorer({ select }) {
 }
 
 export function AboutExplorer({ select }) {
-  return <button className="about-shortcut" onClick={() => select('About')}><img src={profile.portrait} alt="" /><span><strong>My story</strong><small>Education, interests, and what I’m working toward</small></span><ArrowUpRight size={16} /></button>
+  return <button className="about-shortcut" onClick={() => select('About')}><img src={profile.portrait} alt="" /><span><strong>My story</strong><small>Education, interests, and what I'm working toward</small></span><ArrowUpRight size={16} /></button>
 }
