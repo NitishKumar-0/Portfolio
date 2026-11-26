@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 import DesktopContent from './components/DesktopContent'
 import { DetailContent, WelcomePanel } from './components/Details'
 import { Window } from './components/Window'
@@ -6,7 +7,7 @@ import { Dock } from './components/Dock'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import { HomeLaunchers } from './components/Launchers'
-import { projects } from './data/portfolio'
+import { projects, skills } from './data/portfolio'
 
 const sectionDetails = { Home: 'Home', About: 'About', Projects: 'Projects', Skills: 'Skills', Contact: 'Contact' }
 const projectNames = projects.map(project => project.name)
@@ -19,6 +20,7 @@ export default function App() {
   const navigate = name => {
     if (sectionDetails[name]) {
       setView(name)
+      if (name === 'Home' || name === 'Projects' || name === 'Skills' || name === 'About') setDetail(name)
       if (name === 'Contact') {
         setDetail('Contact')
         setBottomView('Home')
@@ -57,10 +59,23 @@ export default function App() {
   }, [])
 
   const title = detail.startsWith('skills:') ? detail.slice(7) : detail.startsWith('skill:') ? detail.slice(6) : detail === 'Home' ? 'Home' : detail
+  const mobileBack = () => {
+    if (view === 'Projects' && projectNames.includes(detail)) setDetail('Projects')
+    else if (view === 'Skills' && detail.startsWith('skill:')) {
+      const skillName = detail.slice(6)
+      const category = Object.entries(skills).find(([, names]) => names.includes(skillName))?.[0]
+      setDetail(category ? `skills:${category}` : 'Skills')
+    } else if (view === 'Skills' && detail.startsWith('skills:')) setDetail('Skills')
+    else setDetail(view)
+  }
 
   return <div className="app light">
     <div className="desktop-shell">
       <Navbar view={view} navigate={navigate} />
+      <section className="mobile-content-panel" aria-label={`${view} content`}>
+        {((view === 'Projects' && projectNames.includes(detail)) || (view === 'Skills' && (detail.startsWith('skills:') || detail.startsWith('skill:'))) || (view === 'Home' && detail !== 'Home')) && <button className="mobile-back" onClick={mobileBack}><ArrowLeft size={17} /> Back</button>}
+        {view === 'Home' ? detail !== 'Home' ? <DetailContent detail={detail} select={select} /> : <DetailContent detail="About" select={select} mobileHome /> : view === 'Projects' ? projectNames.includes(detail) ? <DetailContent detail={detail} select={select} /> : <DesktopContent view="Projects" detail={detail} select={select} /> : view === 'Skills' ? detail.startsWith('skills:') || detail.startsWith('skill:') ? <DetailContent detail={detail} select={select} /> : <DesktopContent view="Skills" detail={detail} select={select} /> : view === 'About' ? <DetailContent detail="About" select={select} /> : <DetailContent detail={detail} select={select} />}
+      </section>
       <main className="workspace-layout">
         <section className="upper-workspace" aria-label="Main workspace">
           <Window title="Home" className="detail-window workspace-window hero-workspace-window">

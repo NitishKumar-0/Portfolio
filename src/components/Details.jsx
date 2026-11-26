@@ -15,11 +15,11 @@ export function WelcomePanel() {
   </div>
 }
 
-function AboutPanel() {
+function AboutPanel({ mobileHome = false }) {
   return <div className="detail-stack about-detail">
     <div className="about-intro">
       <img className="about-portrait-large" src={profile.portrait} alt="Nitish Kumar" />
-      <div className="about-intro-copy"><h2>{profile.name}</h2><p className="about-headline">{profile.headline}</p></div>
+      <div className="about-intro-copy"><h2>{mobileHome ? "Hi, I'm Nitish Kumar" : profile.name}</h2><p className="about-headline">{profile.headline}</p></div>
     </div>
     <p className="detail-copy">{profile.about}</p>
     <div className="detail-block"><span className="block-label">EDUCATION</span><p>{profile.education}</p></div>
@@ -98,9 +98,9 @@ function ContactPanel() {
   return <div className="contact-panel"><h2>Let's build something.</h2><p className="muted">Have an idea, a question, or just want to connect?</p><div className="contact-links"><a href={`mailto:${profile.email}`}><Mail size={15} />{profile.email}<ArrowUpRight size={14} /></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={15} />LinkedIn<ArrowUpRight size={14} /></a><a href={profile.github} target="_blank" rel="noreferrer"><Github size={15} />GitHub<ArrowUpRight size={14} /></a></div><form className="contact-form" onSubmit={submit}><label>Name<input name="name" value={form.name} onChange={update} required maxLength="100" /></label><label>Email<input name="email" type="email" value={form.email} onChange={update} required maxLength="254" /></label><label>Message<textarea name="message" value={form.message} onChange={update} required minLength="10" maxLength="3000" rows="4" /></label><button className="action-button primary" type="submit" disabled={sending}><Send size={14} /> {sending ? 'Sending...' : 'Send message'}</button><p className="form-status" aria-live="polite">{status}</p></form></div>
 }
 
-export function DetailContent({ detail, select }) {
+export function DetailContent({ detail, select, mobileHome = false }) {
   if (!detail || detail === 'Welcome') return <WelcomePanel />
-  if (detail === 'About') return <AboutPanel />
+  if (detail === 'About') return <AboutPanel mobileHome={mobileHome} />
   if (detail === 'Skills' || detail.startsWith('skills:') || detail.startsWith('skill:')) return <SkillsPanel detail={detail} select={select} />
   if (detail === 'Activity' || detail === 'GitHub activity') return <ActivityPanel detail={detail} />
   if (detail === 'LeetCode') return <LeetPanel />
